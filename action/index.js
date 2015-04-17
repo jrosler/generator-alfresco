@@ -96,6 +96,8 @@ module.exports = yeoman.generators.Base.extend({
     var parser = new xml2js.Parser();
     var builder = new xml2js.Builder();
     /*
+    // The below code is used to manipulate xml if we are using
+    // individual context file for action bean
     if(this.answers.isAbstract == "false") {
       var xml = null;
       parser.parseString(fileData.substring(0, fileData.length), function (err, result) {
@@ -112,6 +114,8 @@ module.exports = yeoman.generators.Base.extend({
     }
     */
     /*
+    // The below code is used to run over a file containing 
+    // multiple bean definitions to delete 'abstract' attribute
     var xml = null;
     parser.parseString(fileData.substring(0, fileData.length), function (err, result) {
       if(err) {
