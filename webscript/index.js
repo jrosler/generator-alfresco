@@ -22,6 +22,12 @@ module.exports = yeoman.generators.Base.extend({
 	    },
 	    {
 		type    : 'input',
+		name    : 'pkg',
+		message : 'Enter the package for your web script',
+            default : defPkg,
+	    },
+	    {
+		type    : 'input',
 		name    : 'shortName',
 		message : 'Enter a short name, like "My Web Script".  (spaces are okay)',
 	    },
@@ -51,23 +57,32 @@ module.exports = yeoman.generators.Base.extend({
 		type    : 'list',
 		name    : 'auth',
 		message : "Enter the authentication mechanism",
-		choices : ['user', 'none'],
+		choices : ['user', 'admin', 'none'],
 	    },
 	    {
-		type    : 'input',
-		name    : 'pkg',
-		message : 'Enter the package for your web script',
-            default : defPkg,
+		type    : 'list',
+		name    : 'lang',
+		message : 'Enter the implementation language',
+		choices : ['java', 'javascript'],
+	    },
+	    {
+		type    : 'list',
+		name    : 'abstractOrDeclarative',
+		message : 'Abstract or declarative?',
+		choices : ['declarative (return a model that is processed with a template)', 'abstract (write directly to output stream)'],
+		when    : function(props) { props.lang === 'java'; },
 	    },
 	], function (answers) {
-	    this.name      = answers.name;
-	    this.shortName = answers.shortName;
-	    this.wsDesc    = answers.wsDesc;
-	    this.url       = answers.url;
-	    this.method    = answers.method;
-	    this.format    = answers.format;
-	    this.auth      = answers.auth;
-	    this.pkg       = answers.pkg;
+	    this.name       = answers.name;
+	    this.shortName  = answers.shortName;
+	    this.wsDesc     = answers.wsDesc;
+	    this.url        = answers.url;
+	    this.method     = answers.method;
+	    this.format     = answers.format;
+	    this.auth       = answers.auth;
+	    this.pkg        = answers.pkg;
+	    this.lang       = answers.lang;
+	    this.isabstract = this._startsWith(answers.abstractOrDeclarative, 'abstract');
 
 	    // if a url was specified and it does not begin with a slash, prepend a slash
 	    if (this.url && this.url.length > 0 && this.url.charAt(0) !== '/') {
@@ -102,17 +117,21 @@ module.exports = yeoman.generators.Base.extend({
 	    }
 	);
 
-	// copy the controller
-	this.fs.copy(
-	    this.templatePath('webscript.get.js'),
-	    this.destinationPath(webscriptPath + '/' + nameDotMethod + '.js')
-	);
+	// copy the controller template for javascript
+	if (this.lang === 'javascript') {
+	    this.fs.copy(
+		this.templatePath('webscript.get.js'),
+		this.destinationPath(webscriptPath + '/' + nameDotMethod + '.js')
+	    );
+	}
 
 	// copy the template
-	this.fs.copy(
-	    this.templatePath('webscript.get.' + this.format + '.ftl'),
-	    this.destinationPath(webscriptPath + '/' + nameDotMethod + '.' + this.format + '.ftl')
-	);
+	if (this.lang === 'javascript' || !this.isAbstract) { 
+	    this.fs.copy(
+		this.templatePath('webscript.get.' + this.format + '.ftl'),
+		this.destinationPath(webscriptPath + '/' + nameDotMethod + '.' + this.format + '.ftl')
+	    );
+	}
 
     }
 });
