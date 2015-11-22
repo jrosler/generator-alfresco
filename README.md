@@ -1,4 +1,4 @@
-# generator-alfresco [![Build Status](https://secure.travis-ci.org/binduwavell/generator-alfresco.png?branch=master)](https://travis-ci.org/binduwavell/generator-alfresco)
+# generator-alfresco [![Build Status](https://secure.travis-ci.org/binduwavell/generator-alfresco.png?branch=master)](https://travis-ci.org/binduwavell/generator-alfresco) [![create project on Codenvy](https://codenvy.com/factory/resources/factory-white.png)](https://codenvy.com/factory?id=zmv24wynr689af6f) [![Join the chat at https://gitter.im/binduwavell/generator-alfresco](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/binduwavell/generator-alfresco?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 
 > [Yeoman](http://yeoman.io) generator
 
@@ -66,6 +66,10 @@ work for later.
 Here is a video showing the process:
 
 [![watch video demo using Codenvy](http://img.youtube.com/vi/Pq5IwG5Aq0Q/0.jpg)](http://www.youtube.com/watch?v=Pq5IwG5Aq0Q)
+
+## Getting Help
+
+If you find a bug or something is confusing, you can review [existing](https://github.com/binduwavell/generator-alfresco/issues) or create a [new](https://github.com/binduwavell/generator-alfresco/issues/new) issue in this project. If you'd like to chat, you can reach out on our [Gitter](https://gitter.im/binduwavell/generator-alfresco) channel.
 
 ## License
 
